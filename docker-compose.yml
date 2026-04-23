@@ -1,0 +1,24 @@
+name: mailmind
+
+services:
+    backend:
+            build: ./Backend
+            ports:
+              - "8000:8000"
+    
+    database:
+             image: postgres:14.22-trixie
+             ports:
+               - "5432:5432"
+             volumes: 
+              - db:/var/lib/postgresql/data
+             env_file: .env
+    
+    server:
+           image: nginx:stable-trixie
+           ports:
+             - "80:80"
+
+
+volumes:
+  db:
